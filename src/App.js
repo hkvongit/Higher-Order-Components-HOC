@@ -1,11 +1,11 @@
 import React from 'react';
-import Counter from './components/Counter'
+import Button from './Button'
+
 
 function App() {
   return (
     <div className="App">
-      App
-      <Counter/>
+      <Button name = "hari"/>
     </div>
   );
 }

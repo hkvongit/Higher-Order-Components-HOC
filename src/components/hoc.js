@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { Component } from 'react'
 
-const Hoc = WrappedComponent => {
-  const NewComponent = ()=> {
-    const [count, setCount] = useState(0);
-    const handleIncrement = () => {
-      setCount(count + 1);
-    };
-    const resetCounter = () => {
-        setCount(0);
-      };
-    return (
-      <WrappedComponent count={count} handleIncrement={handleIncrement} resetCounter={resetCounter}/>
-    );
-  };
-  return NewComponent;
-};
+const  UpdatedComponent = (OriginalComponent, increamentNumber) =>{
+    
+    class NewComponent extends Component {
+        constructor(props) {
+            super(props)
+        
+            this.state = {
+                 count:0
+            }
+        }
+        incrementCount=()=>{
+            this.setState(prevState => {
+                return {count:prevState.count+increamentNumber}
+            })
+        }
+        render() {
+            const {count} = this.state
+            const {incrementCount} = this
+            return (
+                <OriginalComponent count={count} incrementCount={incrementCount} {...this.props}/>
+            )
+        }
+    }
+    
+    return NewComponent
+}
 
-export default Hoc;
+export default UpdatedComponent
